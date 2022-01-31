@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'HouseMgt_API',
     'HouseMgt_API.user',
     'HouseMgt_API.building',
-    'HouseMgt_API.complaints',
+    'HouseMgt_API.house',
     'HouseMgt_API.payments'
 ]
 
