@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models impport Building
 from rest_framework.reverse import reverse
-from ..HouseMgt_API.user.models import User
+from ..user.models import User
 
 
 

@@ -1,4 +1,4 @@
-from HouseMgt_API.user.models import User
+from ..user.models import User
 from rest_framework import serializers
 
 class UserSerializer(serializers.ModelSerializer):
