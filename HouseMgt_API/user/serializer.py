@@ -10,7 +10,7 @@ class UserSerializer(serializers.ModelSerializer):
     links = serializers.SerializerMethodField('get_links')
     class Meta:
         model = User
-        fields = ['id','username','email','phone','date_joined','room','links' ]
+        fields = ['id',User.USERNAME_FIELD,'email','phone_number','date_joined','links' ]
         read_only_field = ['links','date_joined' ]
 
     def get_links(self, obj):
@@ -21,6 +21,7 @@ class UserSerializer(serializers.ModelSerializer):
             kwargs = {User.USERNAME_FIELD: username}, request=request),
                 }
 
+   
     def update(self, instance, vaidated_data):
         """Performs an update on a user. 
         passwords shouldnt be handled with 'setattr', unlike other fields Django

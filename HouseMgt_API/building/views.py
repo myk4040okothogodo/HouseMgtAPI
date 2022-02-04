@@ -1,4 +1,5 @@
-from rest_framework import authentication, permissions, viewsets
+from rest_framework import authentication, permissions, viewsets, filters
+from django_filters.rest_framework import DjangoFilterBackend
 from .models import  Building
 from .serializer import BuildingSerializer
 
@@ -17,6 +18,11 @@ class DefaultsMixin(object):
     paginate_by = 25
     paginate_by_param = 'page_size'
     max_paginate_by = 100
+    filter_backends = (
+         DjangoFilterBackend,
+         filters.SearchFilter,
+         filters.OrderingFilter
+            )
     
     
 class BuildingViewSet(DefaultsMixin, viewsets.ModelViewSet):
@@ -24,6 +30,8 @@ class BuildingViewSet(DefaultsMixin, viewsets.ModelViewSet):
     
     queryset = Building.objects.order_by('dateCommissioned')
     serializer_class = BuildingSerializer
+    search_fields = ('name',)
+    ordering_fields =('name',)
     
     
     

@@ -8,10 +8,27 @@ User = get_user_model()
 
 class BuildingSerializer(serializers.ModelSerializer):
     links = serializers.SerializerMethodField('get_links')
-    building_owner = serializers.SlugRelatedField(slug_field=User.USERNAME_FIELD, read_only=True)
+    assigned_caretaker = serializers.SlugRelatedField(slug_field=User.USERNAME_FIELD, read_only=True)
     class Meta:
         model = Building
-        fields = ('id','name','owner','careTaker','starsRating','dateCommissioned','account_no')
+        fields = ('id','name','owner','careTaker','starsRating','dateCommissioned','assigned_caretaker','account_no','links')
     def get_links(self,obj):
         request = self.context['request']
-        return {'self': reverse('building-detail', kwargs={'pk':obj.pk}, request=request),}
+        links = {
+                'self': reverse('building-detail',
+                kwargs={'pk':obj.pk}, request=request),
+            'houses':None,
+            'careTaker': None,
+            'owner': None,
+        }
+           
+        if obj.careTaker_id:
+            links['careTaker'] = reverse('user-detail',
+                kwargs ={User.USERNAME_FIELD: obj.careTaker}, request=request
+                    )
+
+        if obj.owner_id:
+            links['owner'] = reverse('user-detail',
+                kwargs = {User.USERNAME_FIELD: obj.owner}, request=request
+                    )
+        return links    

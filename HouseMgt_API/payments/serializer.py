@@ -12,7 +12,26 @@ class PaymentSerializer(serializers.ModelSerializer):
     payment_owner = serializers.SlugRelatedField(slug_field=User.USERNAME_FIELD, read_only=True)
     class Meta:
         model = Payment
-        fields = ('id','tenant','amount_paid','receipt_no','date','links')
+        fields = ('id','tenant','amount_paid','receipt_no','date','payment_owner','links')
     def get_links(self,obj):
         request = self.context['request']
-        return {'self': reverse('account-detail', kwargs={'pk':obj.pk}, request=request),}
+        links = {
+                'self': reverse('payment-detail', 
+                kwargs={'pk':obj.pk}, request=request),
+                'tenant': None,
+                'house':None,
+                'payment_owner': None
+                }
+        """
+        if obj.building_id:
+            links['building'] = reverse('building-detail',
+                kwargs ={'pk': obj.building_id}, request=request
+                    )
+        if obj.house_id:
+            links['house'] = reverse('house-detail',
+                kwargs = {'pk': obj.house_id}, request=request
+                    )
+        """            
+        if obj.tenant:
+            links['tenant'] = reverse('user-detail', kwargs={User.USERNAME_FIELD : obj.tenant}, request=request)
+        return links    
