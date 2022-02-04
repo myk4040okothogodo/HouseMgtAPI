@@ -9,7 +9,7 @@ class House(models.Model):
     building = models.OneToOneField(Building,blank=False, null=False, on_delete=models.CASCADE)
     room_no = models.IntegerField(blank=False,null=False)
     floor_no = models.IntegerField(blank=False, null=False)
-    tenant = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="room_tenant" on_delete=models.CASCADE)
+    tenant = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="house_tenant" ,on_delete=models.CASCADE)
     occupied = models.BooleanField(default=False)
 
 

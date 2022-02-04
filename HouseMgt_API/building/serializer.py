@@ -8,7 +8,7 @@ User = get_user_model()
 
 class BuildingSerializer(serializers.ModelSerializer):
     links = serializers.SerializerMethodField('get_links')
-    building_owner = serializer.SlugRelatedField(slug_field=User.USERNAME_FIELD, read_only=True)
+    building_owner = serializers.SlugRelatedField(slug_field=User.USERNAME_FIELD, read_only=True)
     class Meta:
         model = Building
         fields = ('id','name','owner','careTaker','starsRating','dateCommissioned','account_no')

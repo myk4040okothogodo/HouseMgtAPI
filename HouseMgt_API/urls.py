@@ -1,8 +1,8 @@
 from rest_framework.routers import DefaultRouter
-from .building.view import BuildingViewSet
-from .payment.view import PaymentViewSet
-from .user.view import UserViewSet
-from .house.view import HouseViewSet
+from .building.views import  BuildingViewSet
+from .payments.views import PaymentViewSet
+from .user.views import UserViewSet
+from .house.views import HouseViewSet
 
 router = DefaultRouter()
 

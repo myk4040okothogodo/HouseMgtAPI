@@ -1,5 +1,6 @@
+from django.contrib.auth import get_user_model
 from rest_framework import serializers
-from .models import Payments
+from .models import Payment
 from rest_framework.reverse import reverse
 
 User = get_user_model()
@@ -8,7 +9,7 @@ User = get_user_model()
 
 class PaymentSerializer(serializers.ModelSerializer):
     links = serializers.SerializerMethodField('get_links')
-    payment_owner = serializer.SlugRelatedField(slug_field=User.USERNAME_FIELD, read_only=True)
+    payment_owner = serializers.SlugRelatedField(slug_field=User.USERNAME_FIELD, read_only=True)
     class Meta:
         model = Payment
         fields = ('id','tenant','amount_paid','receipt_no','date','links')

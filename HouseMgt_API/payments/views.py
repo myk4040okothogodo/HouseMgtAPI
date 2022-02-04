@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from rest_framework import authentication, permissions, viewsets
-from .model import Payment
+from .models import Payment
 from .serializer import PaymentSerializer
 
 
@@ -19,8 +19,8 @@ class DefaultsMixin(object):
     max_paginate_by = 100
     
     
-class _PaymentViewSet(DefaultsMixin, viewsets.ModelViewSet):
-    """API endpooint for listing and creating Payments."""
+class PaymentViewSet(DefaultsMixin, viewsets.ModelViewSet):
+    """API endpoint for listing and creating Payments."""
     queryset = Payment.objects.order_by('date')
-    sserializer_class = PaymentSerializer
+    serializer_class = PaymentSerializer
     

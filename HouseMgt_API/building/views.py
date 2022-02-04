@@ -1,6 +1,6 @@
 from rest_framework import authentication, permissions, viewsets
 from .models import  Building
-from .serializers import BuildingSerializer
+from .serializer import BuildingSerializer
 
 
 

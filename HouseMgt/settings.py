@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'djmoney',
     'HouseMgt_API',
     'HouseMgt_API.user',
     'HouseMgt_API.building',
