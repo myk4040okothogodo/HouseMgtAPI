@@ -4,7 +4,7 @@ from django.conf import settings
 import moneyed
 from djmoney.models.fields import MoneyField
 import datetime
-from ..building import Building
+#from ..building import Building
 
 
 
@@ -13,9 +13,9 @@ from ..building import Building
 class Payment(models.Model):
     """This class represents rent/utility payments made by the tenants. """
 
-    building = models.OneToOneField(Building,blank=False, null=False, on_delete=models.CASCADE)
-    room = models.OneToOneField(House,blank=False, null=False, on_delete=models.CASCADE)
-    tenant = models.ForeignKey(settings.AUTH_USER_MODEL,blank=False, null=False, on_delete=models.CASCADE)
+    #building = models.OneToOneField(Building,blank=False, null=False, on_delete=models.CASCADE)
+    #room = models.OneToOneField(House,blank=False, null=False, on_delete=models.CASCADE)
+    tenant = models.ForeignKey(settings.AUTH_USER_MODEL,related_name="room_tenant",blank=False, null=False, on_delete=models.CASCADE)
     amount_paid = MoneyField(max_digits=10, decimal_places=2, default_currency='KES')
     receipt_no = models.IntergerField(blank=False,null=False)
     date = models.DateTimeField(default=datetime.now, blank=False)

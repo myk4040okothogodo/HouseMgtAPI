@@ -1,7 +1,8 @@
 from rest_framework import serializers
 from .models import Payments
 from rest_framework.reverse import reverse
-from ..user.models import User
+
+User = get_user_model()
 
 
 
@@ -10,7 +11,7 @@ class PaymentSerializer(serializers.ModelSerializer):
     payment_owner = serializer.SlugRelatedField(slug_field=User.USERNAME_FIELD, read_only=True)
     class Meta:
         model = Payment
-        fields = ('id','building','room','tenant','amount_paid','receipt_no','links')
+        fields = ('id','tenant','amount_paid','receipt_no','date','links')
     def get_links(self,obj):
         request = self.context['request']
         return {'self': reverse('account-detail', kwargs={'pk':obj.pk}, request=request),}

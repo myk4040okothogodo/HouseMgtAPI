@@ -21,5 +21,5 @@ class DefaultsMixin(object):
 
 class HouseViewSet(DefaultsMixin, viewsets.ModelViewSet):
     """API endpoint for listing and creating Houses."""
-    queryset = House.objects.order_by('building')
+    queryset = House.objects.order_by('room_no')
     serializer_class = HouseSerializer

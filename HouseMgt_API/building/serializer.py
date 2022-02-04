@@ -1,8 +1,9 @@
 from rest_framework import serializers
-from .models impport Building
+from .models import Building
 from rest_framework.reverse import reverse
-from ..user.models import User
+from django.contrib.auth import get_user_model
 
+User = get_user_model()
 
 
 class BuildingSerializer(serializers.ModelSerializer):
@@ -10,7 +11,7 @@ class BuildingSerializer(serializers.ModelSerializer):
     building_owner = serializer.SlugRelatedField(slug_field=User.USERNAME_FIELD, read_only=True)
     class Meta:
         model = Building
-        fields = ('id','name','owner','caretaker','houses','starsRating','account_no')
+        fields = ('id','name','owner','careTaker','starsRating','dateCommissioned','account_no')
     def get_links(self,obj):
         request = self.context['request']
-        return {'self': reverse('account-detail', kwargs={'pk':obj.pk}, request=request),}
+        return {'self': reverse('building-detail', kwargs={'pk':obj.pk}, request=request),}

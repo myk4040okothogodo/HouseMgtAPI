@@ -1,5 +1,10 @@
-from ..user.models import User
+from django.contrib.auth import get_user_model
 from rest_framework import serializers
+from rest_framework.reverse import reverse
+
+
+
+User = get_user_model()
 
 class UserSerializer(serializers.ModelSerializer):
     links = serializers.SerializerMethodField('get_links')
