@@ -18,7 +18,7 @@ class DefaultsMixin(object):
     max_paginate_by = 100
     
     
-class UserViewSet(DefaultsMixin, viewsets.ReadOnlyModelViewSet):
+class UserViewSet(DefaultsMixin, viewsets.ModelViewSet):
     """API endpoint for listing users."""
     lookup_field = User.USERNAME_FIELD
     lookup_url_kwarg = User.USERNAME_FIELD
