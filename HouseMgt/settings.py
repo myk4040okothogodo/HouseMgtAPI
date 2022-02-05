@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-g1p*k!(7pai3q49^&q_6!wi=9fq629!*%mwrk=q@wt9tsfpe-h
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [ ".herokuapp.com", '127.0.0.1', '0.0.0.0']
 
 
 # Application definition
@@ -84,14 +84,22 @@ WSGI_APPLICATION = 'HouseMgt.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'housemgtapi',
+        
+        }
+    }
 
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
+"""
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
