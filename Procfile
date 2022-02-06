@@ -1,3 +1,3 @@
-web: gunicorn  whipp.wsgi:application
+web: gunicorn  HouseMgt.wsgi:application
 release python manage.py   makemigrations --noinput
 release python manage.py   migrate --noinput
