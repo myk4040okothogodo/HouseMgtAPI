@@ -24,11 +24,11 @@ class BuildingSerializer(serializers.ModelSerializer):
            
         if obj.careTaker_id:
             links['careTaker'] = reverse('user-detail',
-                kwargs ={User.USERNAME_FIELD: obj.careTaker}, request=request
+                kwargs ={User.USERNAME_FIELD: obj.careTaker_id}, request=request
                     )
 
         if obj.owner_id:
             links['owner'] = reverse('user-detail',
-                kwargs = {User.USERNAME_FIELD: obj.owner}, request=request
+                kwargs = {User.USERNAME_FIELD: obj.owner_id}, request=request
                     )
         return links    
