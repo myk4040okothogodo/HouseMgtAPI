@@ -32,6 +32,6 @@ class PaymentSerializer(serializers.ModelSerializer):
                 kwargs = {'pk': obj.house_id}, request=request
                     )
         """            
-        if obj.tenant:
-            links['tenant'] = reverse('user-detail', kwargs={User.USERNAME_FIELD : obj.tenant}, request=request)
+        if obj.tenant_id:
+            links['tenant'] = reverse('user-detail', kwargs={User.USERNAME_FIELD : obj.tenant_id}, request=request)
         return links    
