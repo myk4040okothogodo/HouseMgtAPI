@@ -4,6 +4,7 @@ from .models import House
 from .serializer import HouseSerializer
 # Create your views here.
 
+from oauth2_provider.contrib.rest_framework import TokenHasReadWriteScope, TokenHasScope
 
 class DefaultsMixin(object):
     """Default settings for view authentication, permissions, filtering and pagination."""
@@ -27,6 +28,7 @@ class DefaultsMixin(object):
 
 class HouseViewSet(DefaultsMixin, viewsets.ModelViewSet):
     """API endpoint for listing and creating Houses."""
+    #permission_classes = [permissions.IsAuthenticated, TokenHasScope]
     queryset = House.objects.order_by('room_no')
     serializer_class = HouseSerializer
     search_fields = ('building', 'tenant','occupied')

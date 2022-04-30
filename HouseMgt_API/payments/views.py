@@ -4,6 +4,8 @@ from django_filters.rest_framework import DjangoFilterBackend
 from .models import Payment
 from .serializer import PaymentSerializer
 
+from oauth2_provider.contrib.rest_framework import TokenHasReadWriteScope, TokenHasScope
+
 
 class DefaultsMixin(object):
     """Default settings for view authentication, permissions,
@@ -14,6 +16,7 @@ class DefaultsMixin(object):
     )
     permission_classes = (
         permissions.IsAuthenticated,
+        #TokenHasReadWriteScope
     )
     paginate_by = 25
     paginate_by_param = 'page_size'
@@ -28,6 +31,7 @@ class DefaultsMixin(object):
     
 class PaymentViewSet(DefaultsMixin, viewsets.ModelViewSet):
     """API endpoint for listing and creating Payments."""
+    
     queryset = Payment.objects.order_by('date')
     serializer_class = PaymentSerializer
     search_fields = ('tenant','receipt_no','date')

@@ -3,6 +3,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from .models import  Building
 from .serializer import BuildingSerializer
 
+from oauth2_provider.contrib.rest_framework import TokenHasReadWriteScope, TokenHasScope
 
 
 class DefaultsMixin(object):
@@ -14,6 +15,7 @@ class DefaultsMixin(object):
     )
     permission_classes = (
         permissions.IsAuthenticated,
+        #TokenHasReadWriteScope,
     )
     paginate_by = 25
     paginate_by_param = 'page_size'
@@ -27,7 +29,7 @@ class DefaultsMixin(object):
     
 class BuildingViewSet(DefaultsMixin, viewsets.ModelViewSet):
     """API endpoint for listing and creating Buildings.""" 
-    
+        
     queryset = Building.objects.order_by('dateCommissioned')
     serializer_class = BuildingSerializer
     search_fields = ('name',)
