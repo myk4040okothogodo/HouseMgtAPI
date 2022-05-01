@@ -87,13 +87,23 @@ WSGI_APPLICATION = 'HouseMgt.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 #
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+"""
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'housemgt',
+        'USER': 'mikeokoth',
+        'PASSWORD': 'mykokothe',
+    }
+}
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -148,5 +158,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
             'oauth2_provider.contrib.rest_framework.OAuth2Authentication',    
     ),
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend','django_filters.rest_framework.OrderingFilter']
-}
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend','django_filters.rest_framework.OrderingFilter'],
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json'
+
+    }

@@ -1,0 +1,7 @@
+[run]
+source=HouseMgt_API.building/,HouseMgt_API.house/,HouseMgt_API.payments/,HouseMgt_API.user/,
+omit = 
+    venv
+    */migrations/*
+    */tests/*
+    */__init__.py
