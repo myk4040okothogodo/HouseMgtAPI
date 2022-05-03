@@ -1,41 +1,29 @@
-version: 2
+version: 2.1
 jobs:
-  build:
+  test-and-lint:
     docker:
-      #specify the version you desire here
-      -image: circleci/python:3.6.1
       
       
     working_dictionary: ~/repo
     
     steps:
       - checkout
-      
-      #Download and cache dependencies
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "HouseMgtAPI/requirements.txt" }}
-          # fallback to using the latest cache if no exact match is found\
-          - v1-dependencies-
       - run:
           name: install dependencies
-          command: |
-            python3 -m venv venv
-            . venv/bin/activate
-            pip install -r HouseMgtAPI/requirements.txt
-            
-      - save_cache:
-          paths:
-            - ./venv
-          key: v1-dependencies-{{ checksum "requirements.txt" }}
-        
+          command: pip install -r requirements.txt
+      - run:
+          name: lint
+          command: pylint CoreShamiri/  CoreTherapy/
       - run:
           name: run tests
-          command: |
-            . venv/bin/activate
-            cd HouseMgtAPI
-            python manage.py test
-            
+          command: python manage.py test
+
       - store_artifacts:
           path: test-reports
           destination: test-reports
+
+workflows:
+  build-and-test-workflow:
+    jobs:
+      - test-and-lint
+
