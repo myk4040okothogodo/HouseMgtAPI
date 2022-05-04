@@ -34,7 +34,7 @@ class TestHouse(APITestCase):
     def setup_user():
         User = get_user_model()
         return User.objects.create_user(
-            'test',
+            username= 'test',
             email = 'testuser@test.com',
             password = 'test',
             phone_number = '+25470000000'
@@ -77,7 +77,7 @@ class TestHouse(APITestCase):
                 'starsRating' : '4',
                 'account_no'  : '10078058',     
                 }
-        response = self.client.post(self.uri, params)
+        response = self.client.post(self.uri, params, format="json")
         self.assertEqual(response.status_code, 201,
                 'Expected Response Code 201, received {0} instead.'
                 .format(response.status_code)
